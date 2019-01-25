@@ -36,7 +36,7 @@ gradlePlugin {
        create("kloudformation") {
            id = "io.klouds.kloudformation.gradle.plugin"
            displayName = "Kloud Formation Gradle Plugin"
-           description = ""
+           description = "A Kloud Formation Gradle plugin to generate an Amazon Web Service Cloud Formation template using a Kotlin based Domain Specific Language"
            implementationClass = "io.klouds.kloudformation.gradle.plugin.KloudFormationPlugin"
        }
    }

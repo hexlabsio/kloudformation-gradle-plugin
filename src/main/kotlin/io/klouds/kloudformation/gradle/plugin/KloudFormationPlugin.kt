@@ -5,12 +5,19 @@ import io.kloudformation.toJson
 import io.kloudformation.toYaml
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
 import java.io.File
 
+
 open class KloudFormationConfiguration {
+    @Input
     var template: KloudFormationTemplate = KloudFormationTemplate.create {}
+    @InputDirectory
     var directoryPath: String = "build/template/"
+    @Input
     var fileName: String = "template"
+    @Input
     var format: TemplateFormat = TemplateFormat.YAML
 }
 
