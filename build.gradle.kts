@@ -1,13 +1,24 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-plugins {
-   kotlin("jvm") version "1.3.10"
-   `java-gradle-plugin`
-    id("com.gradle.plugin-publish") version "0.10.0"
+fun version(): String {
+    val buildNumber = System.getProperty("BUILD_NUM")
+    val version = "0.1" + if (buildNumber.isNullOrEmpty()) "-SNAPSHOT" else ".$buildNumber"
+    println("building version $version")
+    return version
 }
 
+val projectVersion = version()
+val projectDescription = """KloudFormation Gradle Plugin"""
+
 group = "io.klouds.kloudformation.gradle.plugin"
-version = "1.6-SNAPSHOT"
+version = projectVersion
+description = projectDescription
+
+plugins {
+    kotlin("jvm") version "1.3.10"
+    `java-gradle-plugin`
+    id("com.gradle.plugin-publish") version "0.10.0"
+}
 
 repositories {
    jcenter()
@@ -17,7 +28,7 @@ repositories {
 dependencies {
    implementation(kotlin("stdlib-jdk8"))
    implementation(gradleApi())
-   api("io.kloudformation:kloudformation:0.1.53")
+   api("io.kloudformation:kloudformation:0.1.92")
    testImplementation("junit:junit:4.12")
 }
 
