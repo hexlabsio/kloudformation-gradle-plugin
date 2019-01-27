@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-kloudformation-plugin
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gradle-{{ checksum "build.gradle.kts" }}
+      - run: ./gradlew publishPlugins -DBUILD_NUM=$CIRCLE_BUILD_NUM -Pgradle.publish.key=$GRADLE_PUBLISH_KEY -Pgradle.publish.secret=$GRADLE_PUBLISH_SECRET
+      - store_artifacts:
+          path: build/libs
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: gradle-{{ checksum "build.gradle.kts" }}
