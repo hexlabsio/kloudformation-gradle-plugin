@@ -28,7 +28,7 @@ repositories {
 dependencies {
    implementation(kotlin("stdlib-jdk8"))
    implementation(gradleApi())
-   api("io.kloudformation:kloudformation:0.1.92")
+   api("io.kloudformation:kloudformation:0.1.120")
    testImplementation("junit:junit:4.12")
 }
 
