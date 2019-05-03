@@ -16,24 +16,29 @@ description = projectDescription
 
 plugins {
     kotlin("jvm") version "1.3.10"
+    `maven-publish`
     `java-gradle-plugin`
     id("com.gradle.plugin-publish") version "0.10.0"
 }
 
 repositories {
-   jcenter()
-   mavenCentral()
+    jcenter()
+    mavenCentral()
+    maven(url = "https://dl.bintray.com/hexlabsio/kloudformation")
 }
 
 dependencies {
-   implementation(kotlin("stdlib-jdk8"))
-   implementation(gradleApi())
-   api("io.kloudformation:kloudformation:0.1.120")
-   testImplementation("junit:junit:4.12")
+    implementation(kotlin("stdlib-jdk8"))
+    implementation(gradleApi())
+    implementation("io.hexlabs:kloudformation-runner:1.0.64")
+    implementation("software.amazon.awssdk:cloudformation:2.5.23")
+    implementation("software.amazon.awssdk:s3:2.5.23")
+    api("io.kloudformation:kloudformation:0.1.120")
+    testImplementation("junit:junit:4.12")
 }
 
 tasks.withType<KotlinCompile> {
-   kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 pluginBundle {
@@ -43,12 +48,12 @@ pluginBundle {
 }
 
 gradlePlugin {
-   plugins {
-       create("kloudformation") {
-           id = "io.klouds.kloudformation.gradle.plugin"
-           displayName = "Kloud Formation Gradle Plugin"
-           description = "A Kloud Formation Gradle plugin to generate an Amazon Web Service Cloud Formation template using a Kotlin based Domain Specific Language"
-           implementationClass = "io.klouds.kloudformation.gradle.plugin.KloudFormationPlugin"
-       }
-   }
+    plugins {
+        create("kloudformation") {
+            id = "io.klouds.kloudformation.gradle.plugin"
+            displayName = "Kloud Formation Gradle Plugin"
+            description = "A Kloud Formation Gradle plugin to generate an Amazon Web Service Cloud Formation template using a Kotlin based Domain Specific Language"
+            implementationClass = "io.klouds.kloudformation.gradle.plugin.KloudFormationPlugin"
+        }
+    }
 }
